@@ -1,6 +1,10 @@
 import { useState } from 'react';
 import { FaBars, FaChevronDown, FaChevronUp } from 'react-icons/fa';
 import { Link } from 'react-router';
+import AuthContext from '../../Context/AuthContext';
+import { useContext } from 'react';
+import toast from 'react-hot-toast';
+
 
 const menuItems = [
 
@@ -23,6 +27,21 @@ const menuItems = [
 ];
 
 const Navbar = () => {
+
+  const { user,   signOutUser } = useContext(AuthContext);
+
+  //handle sign out
+  const handleSignOut = () => {
+    signOutUser()
+    .then(() => {
+    toast.success("Log out successfully!")
+     
+    })
+    .catch(error => {
+      console.log(error.message)
+    })
+  }
+
   const [mobileOpen, setMobileOpen] = useState(false);
   const [mobileDropdowns, setMobileDropdowns] = useState({});
 
@@ -63,8 +82,20 @@ const Navbar = () => {
               </div>
             </li>
           ))}
-          <li><Link to="/login">Log in</Link></li>
-          <li><Link to="/signup">Sign Up</Link></li>
+          {
+            user ?
+              <>
+              <button onClick={handleSignOut}
+              >Logout</button>
+
+              </>
+              :
+              <>
+                <li><Link to="/login">Log in</Link></li>
+                <li><Link to="/signup">Sign Up</Link></li>
+
+              </>
+          }
 
         </ul>
 

@@ -1,6 +1,8 @@
-import { createContext, useEffect, useState } from "react";
+import {  useEffect, useState } from "react";
 import PropTypes from "prop-types";
-import { auth } from "../firebase/firebase.config";
+import auth from "../firebase/firebase.config";
+import AuthContext from "../Context/AuthContext";
+
 import {
     createUserWithEmailAndPassword,
     GoogleAuthProvider,
@@ -11,7 +13,8 @@ import {
     updateProfile,
 } from "firebase/auth";
 
-export const AuthContext = createContext(null);
+
+
 
 
 const AuthProvider = ({ children }) => {
@@ -70,6 +73,7 @@ const AuthProvider = ({ children }) => {
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
             setUser(currentUser);
+            console.log("State captured:", currentUser)
             setLoading(false);
         });
         return () => {
@@ -78,9 +82,8 @@ const AuthProvider = ({ children }) => {
     }, []);
 
     return (
-        <AuthContext.Provider value={authInfo}>
+        <AuthContext.Provider  value={authInfo}>
             {children}
-    
         </AuthContext.Provider>
     );
 };

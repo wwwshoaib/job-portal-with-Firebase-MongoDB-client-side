@@ -2,10 +2,47 @@
 
 import Lottie from 'lottie-react';
 import { FaEnvelope, FaEye, FaEyeSlash, FaSignInAlt, FaUserPlus } from 'react-icons/fa';
-import SignUpLottieData from '../../../assets/lottie/sign-up.json';
+import SignUpLottieData from '../../../assets/lottie/signUp.json';
 import { Link } from 'react-router';
+import toast from 'react-hot-toast';
+import { useContext } from 'react';
+import AuthContext from '../../../Context/AuthContext';
+
+
+
 
 const SignUp = () => {
+
+      const {   createUser  } = useContext(AuthContext)
+
+    const handleRegister = e => {
+        e.preventDefault();
+        const form = e.target;
+        const email = form.email.value;
+        const password = form.password.value;
+
+        //password validation
+        const passwordRegEx = /^(?=.*[a-z])(?=.*[A-Z])[a-zA-Z\d]{6}/;
+        if (!passwordRegEx.test(password)) {
+            toast.error("Password must be exactly 6 characters with at least one uppercase and one lowercase letter.");
+            return;
+        }
+       // console.log(email, password);
+
+       createUser(email, password)
+       .then(result => {
+        console.log(result.user)
+       })
+       .catch(error => {
+        console.log(error.message)
+       })
+
+        // form reset
+        form.reset();
+
+
+    }
+
     return (
         <div className="min-h-screen bg-gray-100 flex">
             <div className="w-full lg:w-1/2 flex items-center justify-center p-8">
@@ -19,11 +56,12 @@ const SignUp = () => {
 
                         </div>
 
-                        <form>
+                        <form onSubmit={handleRegister}>
                             <div className="mb-6 relative">
                                 <label className="block text-sm font-medium text-gray-700 mb-2">Email Address</label>
                                 <input
                                     type="email"
+                                    name='email'
                                     required
                                     className="w-full px-4 py-3 pr-10 rounded-lg border border-gray-300 focus:ring-2 focus:ring-red-600"
                                     placeholder="Type your email"
@@ -35,6 +73,7 @@ const SignUp = () => {
                                 <label className="block text-sm font-medium text-gray-700 mb-2">Password</label>
                                 <input
                                     type="password"
+                                    name='password'
                                     required
                                     className="w-full px-4 py-3 pr-10 rounded-lg border border-gray-300 focus:ring-2 focus:ring-red-600"
                                     placeholder="Type your password"
@@ -50,10 +89,13 @@ const SignUp = () => {
                             </button>
 
                             <p className="mt-6 text-center text-gray-600">
-                                Please log in if you already have an account.
-                                <Link className='bg-slate-200 text-red-500 btn'
-                                    to="/login" >Log in</Link>
-
+                                Don&apos;t have an account?
+                                <Link to="/login"
+                                    type="button"
+                                    className="ml-1 text-red-600 hover:text-red-700 font-semibold"
+                                >
+                                    Log in
+                                </Link>
                             </p>
 
                         </form>

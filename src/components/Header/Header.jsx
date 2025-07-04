@@ -1,5 +1,6 @@
 
 import { FaSearch } from 'react-icons/fa';
+import logo from '../../assets/logo.png'
 
 const Header = () => {
   return (
@@ -11,22 +12,16 @@ const Header = () => {
         {/* Logo section */}
         <div className="text-center w-1/2 md:w-1/3">
           <a href="/" className="inline-block">
-            <div className="flex items-center justify-center">
-              <span className="logo-font text-5xl italic font-normal text-gray-900">active</span>
-              <img
-                src="https://placehold.co/40x25/FF6B00/FFFFFF?text=dm"
-                alt="DM Logo"
-                className="ml-2 mt-3"
-              />
-            </div>
-            <div className="text-5xl font-bold text-gray-900 -mt-2">BEAUTY</div>
+          <img src= {logo} alt="" />
+           
+           
           </a>
         </div>
 
         {/* Search section */}
         <div className="w-1/4 md:w-1/3 flex justify-end">
           <div className="flex items-center">
-            <span className="text-sm text-gray-600 mr-2">Suche</span>
+           
             <div className="border-b border-gray-300 pb-1 flex items-center">
               <input
                 type="text"
