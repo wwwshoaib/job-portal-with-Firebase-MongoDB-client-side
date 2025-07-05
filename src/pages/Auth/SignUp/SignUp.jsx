@@ -1,12 +1,13 @@
 
 
 import Lottie from 'lottie-react';
-import { FaEnvelope, FaEye, FaEyeSlash, FaSignInAlt, FaUserPlus } from 'react-icons/fa';
+import { FaEnvelope, FaEye, FaSignInAlt } from 'react-icons/fa';
 import SignUpLottieData from '../../../assets/lottie/signUp.json';
 import { Link } from 'react-router';
 import toast from 'react-hot-toast';
 import { useContext } from 'react';
 import AuthContext from '../../../Context/AuthContext';
+import SocialLogin from '../../../components/SocialLogin/SocialLogin';
 
 
 
@@ -44,7 +45,7 @@ const SignUp = () => {
     }
 
     return (
-        <div className="min-h-screen bg-gray-100 flex">
+        <div className="w-10/12 mx-auto bg-gray-100 flex ">
             <div className="w-full lg:w-1/2 flex items-center justify-center p-8">
                 <div className="w-full max-w-md">
                     <div className="bg-white rounded-2xl shadow-xl p-8">
@@ -99,6 +100,7 @@ const SignUp = () => {
                             </p>
 
                         </form>
+                        <SocialLogin></SocialLogin>
                     </div>
                 </div>
             </div>

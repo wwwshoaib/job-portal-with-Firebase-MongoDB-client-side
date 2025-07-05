@@ -1,15 +1,17 @@
 
 import Lottie from 'lottie-react';
-import { FaEnvelope, FaEye, FaEyeSlash, FaSignInAlt, FaUserPlus } from 'react-icons/fa';
+import { FaEnvelope, FaEye, FaSignInAlt } from 'react-icons/fa';
 import LoginLottieData from '../../../assets/lottie/login.json';
-import { Link } from 'react-router';
+import { Link, useNavigate } from 'react-router';
 import toast from 'react-hot-toast';
 import AuthContext from '../../../Context/AuthContext';
 import { useContext } from 'react';
+import SocialLogin from '../../../components/SocialLogin/SocialLogin';
 
 const Login = () => {
 
   const { signInUser } = useContext(AuthContext)
+  const navigate = useNavigate();
   const handleLogin = e => {
     e.preventDefault();
     const form = e.target;
@@ -27,6 +29,7 @@ const Login = () => {
       .then(result => {
         console.log(result.user);
         toast.success("Log in successfully!")
+        navigate("/")
       })
       .catch(error => {
         console.log(error.message)
@@ -89,6 +92,7 @@ const Login = () => {
                 </Link>
               </p>
             </form>
+            <SocialLogin></SocialLogin>
           </div>
         </div>
       </div>
