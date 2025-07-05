@@ -29,9 +29,9 @@ const SocialLogin = () => {
                     onClick={handleGoogleLogin}
                     className="flex items-center gap-2 mx-auto px-4 py-2 border border-gray-300 rounded-md hover:bg-gray-100 transition"
                 >
-                   
+                      <FcGoogle className="text-xl" />
                     <span>Sign in with Google, </span>
-                     <FcGoogle className="text-xl" />
+                  
                 </button>
             </div>
 
