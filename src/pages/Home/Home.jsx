@@ -4,9 +4,10 @@ import HotJobs from "../../components/HotJobs/HotJobs";
 
 const Home = () => {
     return (
-        <div className="w-full md:w-10/12 mx-auto">
+        <div className="">
             <Banner></Banner>
             <HotJobs></HotJobs>
+            
             
         </div>
     );

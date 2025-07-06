@@ -18,10 +18,10 @@ const HotJobs = () => {
   if (isPending) return <p className="text-center text-xl py-8">Loading...</p>;
   if (error) return <p className="text-center text-red-600">Error: {error.message}</p>;
 
-  console.log(data)
+
 
     return (
-        <div>
+        <div className="w-10/12 mx-auto grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-3">
             {
                 data.map(job => <HotJobCard key ={job._id} job ={job} ></HotJobCard>)
             }

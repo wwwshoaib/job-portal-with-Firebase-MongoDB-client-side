@@ -32,17 +32,55 @@ const Navbar = () => {
         <div className="flex justify-between h-16">
           <div className="flex items-center">
             <a href="#" className="flex-shrink-0 flex items-center">
-              <img className="h-8 w-auto" src= {logo} alt="Logo" />
+              <img className="h-8 w-auto" src={logo} alt="Logo" />
               <span className="ml-2 text-xl font-bold">Job Portal</span>
             </a>
             <div className="hidden md:ml-6 md:flex md:space-x-8">
-              <NavLink to="/"
-              className="text-white border-b-2 border-indigo-500 px-1 pt-1 text-sm font-medium">Home</NavLink>
-              <NavLink to= "/team"
-              className="text-gray-300 hover:text-white hover:border-gray-300 border-b-2 border-transparent px-1 pt-1 text-sm font-medium">Team</NavLink>
-              <NavLink className="text-gray-300 hover:text-white hover:border-gray-300 border-b-2 border-transparent px-1 pt-1 text-sm font-medium">Projects</NavLink>
-              <NavLink className="text-gray-300 hover:text-white hover:border-gray-300 border-b-2 border-transparent px-1 pt-1 text-sm font-medium">Calendar</NavLink>
+              <NavLink
+                to="/"
+                className={({ isActive }) =>
+                  isActive
+                    ? "text-white border-b-2 border-indigo-500 px-1 pt-1 text-sm font-medium"
+                    : "text-gray-300 hover:text-white hover:border-gray-300 border-b-2 border-transparent px-1 pt-1 text-sm font-medium"
+                }
+              >
+                Home
+              </NavLink>
+
+              <NavLink
+                to="/jobs"
+                className={({ isActive }) =>
+                  isActive
+                    ? "text-white border-b-2 border-indigo-500 px-1 pt-1 text-sm font-medium"
+                    : "text-gray-300 hover:text-white hover:border-gray-300 border-b-2 border-transparent px-1 pt-1 text-sm font-medium"
+                }
+              >
+                Jobs
+              </NavLink>
+
+              <NavLink
+                to="/projects"
+                className={({ isActive }) =>
+                  isActive
+                    ? "text-white border-b-2 border-indigo-500 px-1 pt-1 text-sm font-medium"
+                    : "text-gray-300 hover:text-white hover:border-gray-300 border-b-2 border-transparent px-1 pt-1 text-sm font-medium"
+                }
+              >
+                Projects
+              </NavLink>
+
+              <NavLink
+                to="/calendar"
+                className={({ isActive }) =>
+                  isActive
+                    ? "text-white border-b-2 border-indigo-500 px-1 pt-1 text-sm font-medium"
+                    : "text-gray-300 hover:text-white hover:border-gray-300 border-b-2 border-transparent px-1 pt-1 text-sm font-medium"
+                }
+              >
+                Calendar
+              </NavLink>
             </div>
+
           </div>
 
           <div className="flex items-center">

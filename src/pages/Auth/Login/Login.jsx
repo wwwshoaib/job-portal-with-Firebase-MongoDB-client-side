@@ -39,7 +39,7 @@ const Login = () => {
     form.reset();
   }
   return (
-    <div className="min-h-screen bg-gray-100 flex">
+    <div className="w-10/12 mx-auto min-h-screen bg-gray-100 flex">
       <div className="w-full lg:w-1/2 flex items-center justify-center p-8">
         <div className="w-full max-w-md">
           <div className="bg-white rounded-2xl shadow-xl p-8">

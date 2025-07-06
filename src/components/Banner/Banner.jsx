@@ -4,7 +4,7 @@ import team2 from '../../assets/team/team2.jpg'
 
 const Banner = () => {
     return (
-        <div className="">
+        <div className="w-full md:w-10/12 mx-auto">
             <div className="hero bg-base-200 min-h-screen">
                 <div className="hero-content flex-col lg:flex-row-reverse">
                     {/* part - 2: image */}

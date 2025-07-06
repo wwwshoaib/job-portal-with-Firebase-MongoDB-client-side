@@ -8,7 +8,8 @@ import HomeLayout from "../layouts/HomeLayout";
 import Home from "../pages/Home/Home";
 import Login from "../pages/Auth/Login/Login";
 import SignUp from "../pages/Auth/SignUp/SignUp";
-import Team from "../pages/Team/Team";
+import AllJobs from "../pages/AllJobs/AllJobs";
+import JobDetails from "../pages/JobDetails/JobDetails";
 
  export const router = createBrowserRouter([
   {
@@ -29,8 +30,13 @@ import Team from "../pages/Team/Team";
         element: <SignUp></SignUp>,
       },
       {
-        path: "/team",
-        element: <Team></Team>,
+        path: "/jobs",
+        element: <AllJobs></AllJobs>
+      },
+      {
+        path: "/jobs/:id",
+        element: <JobDetails></JobDetails>,
+        loader: ( {params} ) => fetch(`http://localhost:5000/jobs/${params.id}`)
       },
     ],
   },
