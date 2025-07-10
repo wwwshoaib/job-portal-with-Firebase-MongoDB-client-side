@@ -1,3 +1,6 @@
+
+
+
 const socialLinks = [
   {
     name: "Facebook",
@@ -33,12 +36,7 @@ const Footer = () => {
           {/* Company Info */}
           <div className="space-y-4">
             <div className="flex items-center">
-              <svg className="h-8 w-8 text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
-                  d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"
-                />
-              </svg>
-              <span className="ml-2 text-xl font-bold">Company</span>
+              <span className="ml-2 text-xl font-bold">Job Portal</span>
             </div>
             <p className="text-gray-400">Building innovative solutions for the modern world.</p>
             <div className="flex space-x-4">
@@ -81,18 +79,19 @@ const Footer = () => {
           <div className="space-y-4">
             <h3 className="text-lg font-semibold">Contact Us</h3>
             <address className="not-italic text-gray-400">
-              <p>123 Business Ave</p>
-              <p>San Francisco, CA 94107</p>
+              <p> <strong>Shoaib Ahmed,</strong> Aspiring Web Developer,</p>
+              <p>Modina Market, Akhalia,</p>
+              <p>Sylhet, 3100, Bangladesh</p>
               <p className="mt-2">
                 Email:{" "}
                 <a href="mailto:info@company.com" className="hover:text-white transition">
-                  info@company.com
+                  shoaibskisc@gmail.com
                 </a>
               </p>
               <p>
                 Phone:{" "}
                 <a href="tel:+11234567890" className="hover:text-white transition">
-                  +1 (123) 456-7890
+                  +880 1554 734 402
                 </a>
               </p>
             </address>

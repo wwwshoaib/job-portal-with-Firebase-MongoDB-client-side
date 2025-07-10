@@ -3,7 +3,7 @@
 import Lottie from 'lottie-react';
 import { FaEnvelope, FaEye, FaSignInAlt } from 'react-icons/fa';
 import SignUpLottieData from '../../../assets/lottie/signUp.json';
-import { Link } from 'react-router';
+import { Link, useNavigate } from 'react-router';
 import toast from 'react-hot-toast';
 import { useContext } from 'react';
 import AuthContext from '../../../Context/AuthContext';
@@ -14,7 +14,9 @@ import SocialLogin from '../../../components/SocialLogin/SocialLogin';
 
 const SignUp = () => {
 
-      const {   createUser  } = useContext(AuthContext)
+    const { createUser } = useContext(AuthContext)
+
+    const navigate = useNavigate();
 
     const handleRegister = e => {
         e.preventDefault();
@@ -22,24 +24,49 @@ const SignUp = () => {
         const email = form.email.value;
         const password = form.password.value;
 
-        //password validation
-        const passwordRegEx = /^(?=.*[a-z])(?=.*[A-Z])[a-zA-Z\d]{6}/;
-        if (!passwordRegEx.test(password)) {
-            toast.error("Password must be exactly 6 characters with at least one uppercase and one lowercase letter.");
-            return;
-        }
-       // console.log(email, password);
+       
 
-       createUser(email, password)
-       .then(result => {
-        console.log(result.user)
-       })
-       .catch(error => {
-        console.log(error.message)
-       })
+        const validatePassword = (password) => {
+            if (password.length < 6) {
+                toast.error("Password must be at least 6 characters long.");
+                return false;
+            }
+
+            if (!/[a-z]/.test(password)) {
+                toast.error("Password must contain at least one lowercase letter.");
+                return false;
+            }
+
+            if (!/[A-Z]/.test(password)) {
+                toast.error("Password must contain at least one uppercase letter.");
+                return false;
+            }
+
+            if (!/^[a-zA-Z\d]+$/.test(password)) {
+                toast.error("Password must only contain letters and numbers.");
+                return false;
+            }
+
+            return true;
+        };
+
+        if (!validatePassword(password)) {
+            return; // Stop form submission or further processing
+        }
+
+        // console.log(email, password);
+
+        createUser(email, password)
+            .then(result => {
+                console.log(result.user)
+            })
+            .catch(error => {
+                console.log(error.message)
+            })
 
         // form reset
         form.reset();
+        navigate('/');
 
 
     }

@@ -15,6 +15,9 @@ export default {
         indie: ["Indie Flower"],
         dancing: ["Dancing Script"],
       },
+       animation: {
+        'bounce-once': 'bounce 1s ease-in-out 1'
+      }
     },
   },
   plugins: [

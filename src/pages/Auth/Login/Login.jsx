@@ -13,31 +13,32 @@ const Login = () => {
   const { signInUser } = useContext(AuthContext)
   const navigate = useNavigate();
   const handleLogin = e => {
-    e.preventDefault();
-    const form = e.target;
-    const email = form.email.value;
-    const password = form.password.value;
-    //password validation
-    const passwordRegEx = /^(?=.*[a-z])(?=.*[A-Z])[a-zA-Z\d]{6}/;
-    if (!passwordRegEx.test(password)) {
-      toast.error("Password must be exactly 6 characters with at least one uppercase and one lowercase letter.");
-      return;
-    }
-    // console.log(email, password);
+  e.preventDefault();
+  const form = e.target;
+  const email = form.email.value;
+  const password = form.password.value;
 
-    signInUser(email, password)
-      .then(result => {
-        console.log(result.user);
-        toast.success("Log in successfully!")
-        navigate("/")
-      })
-      .catch(error => {
-        console.log(error.message)
-      })
+  
 
-    //form reset
-    form.reset();
-  }
+  signInUser(email, password)
+    .then(result => {
+      console.log(result.user);
+      toast.success("Log in successfully!");
+      navigate("/");
+      form.reset();
+    })
+    .catch(error => {
+      
+      if (error.code === "auth/user-not-found") {
+        toast.error("User not found. Please check your email.");
+      } else if (error.code === "auth/wrong-password") {
+        toast.error("Incorrect password. Please try again.");
+      } else {
+        toast.error("Login failed. " + error.message);
+      }
+    });
+};
+
   return (
     <div className="w-10/12 mx-auto min-h-screen bg-gray-100 flex">
       <div className="w-full lg:w-1/2 flex items-center justify-center p-8">
