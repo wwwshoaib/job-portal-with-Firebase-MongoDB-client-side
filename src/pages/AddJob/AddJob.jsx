@@ -1,7 +1,49 @@
 import Lottie from 'lottie-react';
 import addJob from '../../assets/lottie/add-job.json'
+import toast from 'react-hot-toast';
 
 const AddJob = () => {
+
+  const handleAddJob = e => {
+    e.preventDefault();
+    const formData = new FormData(e.target);
+    const initialData = Object.fromEntries(formData.entries());
+   // console.log(initialData);
+   const { min, max, currency, ...newJobData } = initialData;
+   //console.log(newJobData);
+
+   newJobData.salaryRange = { min, max, currency};
+
+   //console.log(newJobData);
+   
+// split requirements depends on new line '\n'
+   newJobData.requirements = newJobData.requirements.split('\n');
+
+// split responsibilities depends on new line '\n'
+   newJobData.responsibilities = newJobData.responsibilities.split('\n');
+   //console.log(newJobData);
+  fetch('http://localhost:5000/jobs', {
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json' 
+  },
+  body: JSON.stringify(newJobData)
+})
+.then(res => res.json())
+.then(data => {
+  if (data.insertedId) {
+    toast.success('Job posted successfully!');
+  } else {
+    toast.error('Failed to post job.');
+  }
+})
+.catch(err => {
+  toast.error('Server error!');
+  console.error(err);
+});
+
+
+  }
 
   /** 
   const {
@@ -40,7 +82,8 @@ const AddJob = () => {
 
         {/* Form Section */}
         <div className="w-full xl:w-1/2 p-8">
-          <form className="py-4 px-6" action="" method="POST">
+          <form onSubmit={handleAddJob}
+          className="py-4 px-6" action="" method="POST">
             {/* title */}
             <div className="mb-4">
               <label className="block text-gray-700 font-bold mb-2" htmlFor="name">
@@ -227,6 +270,7 @@ const AddJob = () => {
                 id="date"
                 type="text"
                 placeholder="Type HR name"
+                name='hr_name'
               />
             </div>
 {/* company logo */}
