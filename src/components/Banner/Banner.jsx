@@ -20,21 +20,20 @@ const Banner = () => {
                         <motion.img
                             src={team2}
                             className="max-w-sm rounded-br-3xl rounded-tl-3xl border-b-[6px] border-l-[6px] border-blue-500  shadow-2xl w-64"
-                            animate={{ x: [0, 100, 0] }}
-                            transition={{ duration: 10, delay:5, repeat: Infinity }}
+                            animate={{ x: [0, 50, 0] }}
+                            transition={{ duration: 10, delay: 0, repeat: Infinity }}
                         />
                     </div>
                     {/*  part -1: find jobs */}
                     <div className="flex-1">
                         <motion.h1
                             className="text-2xl md:text-4xl font-bold"
-                            animate={{ x: 20, color: ["#22a133", "#1549ab", "#dbed11", "#ed1111", "#0d0c0c"] }}
+                            animate={{ x: 10, color: ["#22a133", "#1549ab", "#dbed11", "#ed1111", "#0d0c0c"] }}
                             transition={{ duration: 2, delay: 1, repeat: Infinity, }}
                         >Latest  jobs for you!</motion.h1>
 
                         <p className="py-6">
-                            Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda excepturi exercitationem
-                            quasi. In deleniti eaque aut repudiandae et a id nisi.
+                         Find the newest job posts made just for you. No matter your skill or experience, we help you get the right job faster. Start your journey today and take one step closer to your dream career.
                         </p>
                         <button className="btn btn-primary">Get Started</button>
                     </div>

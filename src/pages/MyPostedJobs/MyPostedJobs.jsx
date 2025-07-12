@@ -5,7 +5,7 @@ const MyPostedJobs = () => {
   const [myPostedJobs, setMyPostedJobs] = useState([]);
   const { user } = useAuth();
 
-  console.log("Logged in user email:", user?.email);
+  
 
   useEffect(() => {
     {
@@ -16,7 +16,7 @@ const MyPostedJobs = () => {
     }
   }, [user?.email]);
 
-  console.log(myPostedJobs)
+
 
 
   return (
@@ -41,6 +41,7 @@ const MyPostedJobs = () => {
               <th>Sl.</th>
               <th>Title</th>
               <th>Category</th>
+              <th>Application Count</th>
               <th>Deadline</th>
             </tr>
           </thead>
@@ -52,6 +53,7 @@ const MyPostedJobs = () => {
                   <th>{index + 1}</th>
                   <td>{job.title}</td>
                   <td>{job.category}</td>
+                  <td>{job.applicationCount}</td>
                   <td>{job.applicationDeadline}</td>
                 </tr>
               ))

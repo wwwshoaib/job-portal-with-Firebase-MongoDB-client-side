@@ -36,9 +36,9 @@ const Footer = () => {
           {/* Company Info */}
           <div className="space-y-4">
             <div className="flex items-center">
-              <span className="ml-2 text-xl font-bold">Job Portal</span>
+              <span className="text-xl font-bold">Job Portal</span>
             </div>
-            <p className="text-gray-400">Building innovative solutions for the modern world.</p>
+            <p className="text-gray-400">Your Gateway to Great Careers</p>
             <div className="flex space-x-4">
               {socialLinks.map(({ name, href, svgPath }) => (
                 <a key={name} href={href} className="text-gray-400 hover:text-white transition" target="_blank" rel="noopener noreferrer">
@@ -79,7 +79,8 @@ const Footer = () => {
           <div className="space-y-4">
             <h3 className="text-lg font-semibold">Contact Us</h3>
             <address className="not-italic text-gray-400">
-              <p> <strong>Shoaib Ahmed,</strong> Aspiring Web Developer,</p>
+              <p> <strong>Shoaib Ahmed,</strong> Aspiring Web Developer</p>
+            
               <p>Modina Market, Akhalia,</p>
               <p>Sylhet, 3100, Bangladesh</p>
               <p className="mt-2">
@@ -89,7 +90,7 @@ const Footer = () => {
                 </a>
               </p>
               <p>
-                Phone:{" "}
+                WhatsApp:{" "}
                 <a href="tel:+11234567890" className="hover:text-white transition">
                   +880 1554 734 402
                 </a>
