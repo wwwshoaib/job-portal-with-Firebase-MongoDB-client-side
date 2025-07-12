@@ -1,72 +1,55 @@
 import Lottie from 'lottie-react';
-import addJob from '../../assets/lottie/add-job.json'
+import addJob from '../../assets/lottie/add-job.json';
 import toast from 'react-hot-toast';
+import { useNavigate } from 'react-router';
+import useAuth from '../../hooks/useAuth';
+
 
 const AddJob = () => {
 
-  const handleAddJob = e => {
+  
+const { user } = useAuth();
+
+  const navigate = useNavigate();
+
+  const handleAddJob = (e) => {
     e.preventDefault();
     const formData = new FormData(e.target);
     const initialData = Object.fromEntries(formData.entries());
-   // console.log(initialData);
-   const { min, max, currency, ...newJobData } = initialData;
-   //console.log(newJobData);
 
-   newJobData.salaryRange = { min, max, currency};
+    const { min, max, currency, ...newJobData } = initialData;
+    newJobData.salaryRange = { min, max, currency };
 
-   //console.log(newJobData);
-   
-// split requirements depends on new line '\n'
-   newJobData.requirements = newJobData.requirements.split('\n');
+    // Convert multi-line text to arrays
+    newJobData.requirements = newJobData.requirements.split('\n');
+    newJobData.responsibilities = newJobData.responsibilities.split('\n');
+    newJobData.hr_email = user.email;
 
-// split responsibilities depends on new line '\n'
-   newJobData.responsibilities = newJobData.responsibilities.split('\n');
-   //console.log(newJobData);
-  fetch('http://localhost:5000/jobs', {
-  method: 'POST',
-  headers: {
-    'Content-Type': 'application/json' 
-  },
-  body: JSON.stringify(newJobData)
-})
-.then(res => res.json())
-.then(data => {
-  if (data.insertedId) {
-    toast.success('Job posted successfully!');
-  } else {
-    toast.error('Failed to post job.');
-  }
-})
-.catch(err => {
-  toast.error('Server error!');
-  console.error(err);
-});
+    fetch('http://localhost:5000/jobs', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(newJobData),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.insertedId) {
+          toast.success('Job posted successfully!');
+          navigate('/');
+        } else {
+          toast.error('Failed to post job.');
+        }
+      })
+      .catch((err) => {
+        toast.error('Server error!');
+        console.error(err);
+      });
+  };
 
-
-  }
-
-  /** 
-  const {
-    _id,
-    title,
-    location,
-    jobType,
-    category,
-    applicationDeadline,
-    salaryRange: { min, max, currency },
-    description,
-    company,
-    requirements,
-    responsibilities,
-    status,
-    hr_email,
-    hr_name,
-    company_logo,
-  } = job;
-   */
   return (
     <div className="w-10/12 mx-auto">
-      {/* Title: Add Job */}
+      {/* Title */}
       <div className="text-center py-10">
         <h1 className="text-4xl font-bold text-gray-800">
           Add <span className="text-blue-600">Jobs</span>
@@ -75,54 +58,59 @@ const AddJob = () => {
 
       {/* Form Container */}
       <div className="container max-w-md mx-auto xl:max-w-3xl h-full flex bg-white rounded-lg shadow overflow-hidden">
-        {/* Image Section */}
+        {/* Lottie Animation */}
         <div className="relative hidden xl:block xl:w-1/2 h-full">
-          <Lottie animationData={addJob} ></Lottie>
+          <Lottie animationData={addJob}></Lottie>
         </div>
 
         {/* Form Section */}
         <div className="w-full xl:w-1/2 p-8">
-          <form onSubmit={handleAddJob}
-          className="py-4 px-6" action="" method="POST">
-            {/* title */}
+          <form onSubmit={handleAddJob} className="py-4 px-6" method="POST">
+            {/* Job Title */}
             <div className="mb-4">
-              <label className="block text-gray-700 font-bold mb-2" htmlFor="name">
+              <label className="block text-gray-700 font-bold mb-2" htmlFor="title">
                 Job Title
               </label>
               <input
-                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                id="name"
+                id="title"
                 type="text"
-                name='title'
+                name="title"
                 placeholder="Enter job title"
+                required
+                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
               />
             </div>
 
-            {/* location */}
+            {/* Job Location */}
             <div className="mb-4">
-              <label className="block text-gray-700 font-bold mb-2" htmlFor="name">
+              <label className="block text-gray-700 font-bold mb-2" htmlFor="location">
                 Job Location
               </label>
               <input
-                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                id="name"
+                id="location"
                 type="text"
-                name='location'
+                name="location"
                 placeholder="Enter job location"
+                required
+                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
               />
             </div>
 
             {/* Job Type */}
             <div className="mb-4">
-              <label className="block text-gray-700 font-bold mb-2" htmlFor="name">
+              <label className="block text-gray-700 font-bold mb-2" htmlFor="jobType">
                 Job Type
               </label>
-              <select defaultValue="Select Job Type"
-                className="select shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                id="service"
+              <select
+                defaultValue="select-job-type"
+                id="jobType"
                 name="jobType"
+                required
+                className="select shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
               >
-                <option disabled={true} >Select Job Type</option>
+                <option disabled value="select-job-type">
+                  Select Job Type
+                </option>
                 <option value="hybrid">Hybrid</option>
                 <option value="intern">Intern</option>
                 <option value="remote">Remote</option>
@@ -134,173 +122,186 @@ const AddJob = () => {
 
             {/* Category */}
             <div className="mb-4">
-              <label className="block text-gray-700 font-bold mb-2" htmlFor="name">
+              <label className="block text-gray-700 font-bold mb-2" htmlFor="category">
                 Category
               </label>
-              <select defaultValue="Select Category"
-                className="select shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                id="service"
+              <select
+                defaultValue="select-category"
+                id="category"
                 name="category"
+                required
+                className="select shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
               >
-                <option disabled={true}>Select Category</option>
-                <option value="engineering">Engineering</option>
-                <option value="marketing">Marketing</option>
-                <option value="finance">Finance</option>
-                <option value="teaching">Teaching</option>
-                <option value="management">Management</option>
-                <option value="data-science">Date Science</option>
-                <option value="design">Design</option>
+                <option disabled value="select-category">
+                  Select Category
+                </option>
+                <option >Engineering</option>
+                <option >Marketing</option>
+                <option >Finance</option>
+                <option >Teaching</option>
+                <option >Management</option>
+                <option >Data Science</option>
+                <option >Design</option>
               </select>
             </div>
 
-            {/* Deadline */}
+            {/* Application Deadline */}
             <div className="mb-4">
-              <label className="block text-gray-700 font-bold mb-2" htmlFor="date">
+              <label className="block text-gray-700 font-bold mb-2" htmlFor="applicationDeadline">
                 Deadline
               </label>
               <input
-                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                id="date"
+                id="applicationDeadline"
                 type="date"
-                placeholder="Select a date"
-                name='applicationDeadline'
+                name="applicationDeadline"
+                required
+                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
               />
             </div>
 
             {/* Salary */}
-            <div className="mb-4 ">
-              <label className="block text-gray-700 font-bold mb-2" htmlFor="date">
-                Salary
-              </label>
-              <div className='mt-1'>
-                <input type="number" name='min' placeholder='Minimum' className='border border-spacing-1' />
-              </div>
-              <div className='mt-1'>
-                <input type="number" name='max' placeholder='Maximum' className='border border-spacing-1' />
-              </div>
-              <div className='mt-1'>
-                <select defaultValue="Select Currency" className="select border border-spacing-1 " name='currency'>
-                  <option disabled={true}>Select Currency</option>
-                  <option value="bdt">BDT</option>
-                  <option value="usd">USD</option>
-
+            <div className="mb-4">
+              <label className="block text-gray-700 font-bold mb-2">Salary</label>
+              <div className="flex gap-2">
+                <input
+                  type="number"
+                  name="min"
+                  placeholder="Minimum"
+                  required
+                  className="w-1/3 border rounded py-2 px-2"
+                />
+                <input
+                  type="number"
+                  name="max"
+                  placeholder="Maximum"
+                  required
+                  className="w-1/3 border rounded py-2 px-2"
+                />
+                <select name="currency" required className="w-1/3 border rounded py-2 px-2">
+                  <option disabled value="">
+                    Select Currency
+                  </option>
+                  <option value="BDT">BDT</option>
+                  <option value="USD">USD</option>
                 </select>
-
               </div>
-
             </div>
 
             {/* Description */}
             <div className="mb-4">
-              <label className="block text-gray-700 font-bold mb-2" htmlFor="message">
+              <label className="block text-gray-700 font-bold mb-2" htmlFor="description">
                 Job Description
               </label>
               <textarea
-                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                id="message"
-                rows="4"
+                id="description"
+                name="description"
+                rows="3"
                 placeholder="Enter job description"
-                name='description'
+                required
+                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
               ></textarea>
             </div>
 
-            {/* company */}
+            {/* Company Name */}
             <div className="mb-4">
-              <label className="block text-gray-700 font-bold mb-2" htmlFor="name">
+              <label className="block text-gray-700 font-bold mb-2" htmlFor="company">
                 Company Name
               </label>
               <input
-                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                id="name"
+                id="company"
                 type="text"
-                name='company'
+                name="company"
                 placeholder="Enter company name"
+                required
+                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
               />
             </div>
 
             {/* Requirements */}
             <div className="mb-4">
-              <label className="block text-gray-700 font-bold mb-2" htmlFor="message">
+              <label className="block text-gray-700 font-bold mb-2" htmlFor="requirements">
                 Job Requirements
               </label>
               <textarea
-                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                id="message"
+                id="requirements"
+                name="requirements"
                 rows="3"
                 placeholder="Enter each requirement in a new line"
-                name='requirements'
+                required
+                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
               ></textarea>
             </div>
 
             {/* Responsibilities */}
             <div className="mb-4">
-              <label className="block text-gray-700 font-bold mb-2" htmlFor="message">
+              <label className="block text-gray-700 font-bold mb-2" htmlFor="responsibilities">
                 Job Responsibilities
               </label>
               <textarea
-                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                id="message"
+                id="responsibilities"
+                name="responsibilities"
                 rows="3"
                 placeholder="Enter each responsibility in a new line"
-                name='responsibilities'
+                required
+                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
               ></textarea>
             </div>
 
-            {/* Email */}
+            {/* HR Email */}
             <div className="mb-4">
-              <label className="block text-gray-700 font-bold mb-2" htmlFor="phone">
+              <label className="block text-gray-700 font-bold mb-2" htmlFor="hr_email">
                 HR Email
               </label>
               <input
-                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                id="phone"
+                id="hr_email"
                 type="email"
-                name='hr_email'
+                name="hr_email"
                 placeholder="Enter HR Email"
+                required
+                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
               />
             </div>
 
-            {/* Name */}
+            {/* HR Name */}
             <div className="mb-4">
-              <label className="block text-gray-700 font-bold mb-2" htmlFor="date">
+              <label className="block text-gray-700 font-bold mb-2" htmlFor="hr_name">
                 HR Name
               </label>
               <input
-                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                id="date"
+                id="hr_name"
                 type="text"
+                name="hr_name"
                 placeholder="Type HR name"
-                name='hr_name'
+                required
+                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
               />
             </div>
-{/* company logo */}
+
+            {/* Company Logo */}
             <div className="mb-4">
-              <label className="block text-gray-700 font-bold mb-2" htmlFor="time">
-                Company Logo
+              <label className="block text-gray-700 font-bold mb-2" htmlFor="company_logo">
+                Company Logo URL
               </label>
               <input
-                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                id="time"
+                id="company_logo"
                 type="text"
-                placeholder="Give Logo URL"
-                name='company_logo'
+                name="company_logo"
+                placeholder="Provide logo image URL"
+                required
+                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
               />
             </div>
 
-          
-
-           
-
+            {/* Submit Button */}
             <div className="flex items-center justify-center mb-4">
               <button
-                className="bg-gray-900 text-white py-2 px-4 rounded hover:bg-gray-800 focus:outline-none focus:shadow-outline"
                 type="submit"
+                className="bg-gray-900 text-white py-2 px-4 rounded hover:bg-gray-800 focus:outline-none focus:shadow-outline"
               >
                 Post Job Application
               </button>
             </div>
           </form>
-
         </div>
       </div>
     </div>
