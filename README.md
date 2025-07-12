@@ -34,17 +34,4 @@ A **modern job portal** web application where users can view, post, and apply fo
 ### 🔒 Authentication
 - **Firebase Authentication** – Handles user sign-up, login, and session.
 
-### ⚙️ State & Data Management
-- **React Query (@tanstack/react-query)** – Server-state management and caching.
-- **LocalForage** – Offline storage to enhance user experience.
-
-### 🛠️ Development Tools
-- **Vite** – Blazing-fast dev server and bundler.
-- **ESLint** – Linting for code quality.
-- **PostCSS + Autoprefixer** – CSS post-processing.
-- **TypeScript Types** – Type definitions for React libraries.
-
----
-
-## 📁 Project Structure
 

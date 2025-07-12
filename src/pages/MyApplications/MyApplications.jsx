@@ -39,7 +39,7 @@ const MyApplications = () => {
                                 <th>Company Name & Post Name</th>
                                 <th>Job location & Category</th>
                                 <th>Deadline</th>
-                                <th></th>
+                                <th>View Details</th>
                             </tr>
 
                         </thead>
