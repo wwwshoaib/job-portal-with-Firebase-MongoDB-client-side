@@ -25,7 +25,7 @@ const { user } = useAuth();
     newJobData.responsibilities = newJobData.responsibilities.split('\n');
     newJobData.hr_email = user.email;
 
-    fetch('http://localhost:5000/jobs', {
+    fetch('https://job-portal-server-drab-five.vercel.app/jobs', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

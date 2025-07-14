@@ -10,7 +10,7 @@ const MyApplications = () => {
     const [jobApplications, setJobApplications] = useState([]);
 
     useEffect(() => {
-        fetch(`http://localhost:5000/job-applications?email=${user.email}`)
+        fetch(`https://job-portal-server-drab-five.vercel.app/job-applications?email=${user.email}`)
             .then(res => res.json())
             .then(data => setJobApplications(data))
     }, [user.email])
