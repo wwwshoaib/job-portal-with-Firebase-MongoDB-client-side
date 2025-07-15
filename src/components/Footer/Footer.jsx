@@ -1,5 +1,5 @@
 
-
+import { Link } from "react-router";
 
 const socialLinks = [
   {
@@ -51,27 +51,46 @@ const Footer = () => {
             </div>
           </div>
 
-          {/* Quick Links */}
+          {/* Job Seekers */}
           <div className="space-y-4">
-            <h3 className="text-lg font-semibold">Quick Links</h3>
+            <h3 className="text-lg font-semibold">Job Seekers</h3>
             <ul className="space-y-2">
-              {["Home", "About Us", "Services", "Pricing", "Blog"].map((link, idx) => (
-                <li key={idx}>
-                  <a href="#" className="text-gray-400 hover:text-white transition">{link}</a>
+              
+                <li >
+                  <Link to = '/signup' className="text-gray-400 hover:text-white transition">Create Account</Link>
                 </li>
-              ))}
+                <li >
+                  <Link to = '/jobs' className="text-gray-400 hover:text-white transition">Search all Jobs</Link>
+                </li>
+                <li >
+                  <Link to = '/faqs' className="text-gray-400 hover:text-white transition">FAQs</Link>
+                </li>
+                <li >
+                  <Link to = '/my-applications' className="text-gray-400 hover:text-white transition">My Applications</Link>
+                </li>
+                
+            
             </ul>
           </div>
 
-          {/* Services */}
+            {/* Recruiter */}
           <div className="space-y-4">
-            <h3 className="text-lg font-semibold">Services</h3>
+            <h3 className="text-lg font-semibold">Recruiter</h3>
             <ul className="space-y-2">
-              {["Web Development", "Mobile Apps", "UI/UX Design", "Digital Marketing", "Cloud Solutions"].map((item, idx) => (
-                <li key={idx}>
-                  <a href="#" className="text-gray-400 hover:text-white transition">{item}</a>
+              
+                <li >
+                  <Link to = '/signup' className="text-gray-400 hover:text-white transition">Create Account</Link>
                 </li>
-              ))}
+                <li >
+                  <Link to = '/addjob' className="text-gray-400 hover:text-white transition">Post a Job</Link>
+                </li>
+                <li >
+                  <Link to = '/faqs' className="text-gray-400 hover:text-white transition">FAQs</Link>
+                </li>
+                <li >
+                  <Link to = '/my-posted-jobs' className="text-gray-400 hover:text-white transition">My Posted Jobs</Link>
+                </li>
+            
             </ul>
           </div>
 

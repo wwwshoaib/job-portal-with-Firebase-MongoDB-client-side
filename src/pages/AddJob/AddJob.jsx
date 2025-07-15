@@ -99,7 +99,7 @@ const { user } = useAuth();
             {/* Job Type */}
             <div className="mb-4">
               <label className="block text-gray-700 font-bold mb-2" htmlFor="jobType">
-                Job Type
+                Workplace Type
               </label>
               <select
                 defaultValue="select-job-type"
@@ -109,14 +109,12 @@ const { user } = useAuth();
                 className="select shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
               >
                 <option disabled value="select-job-type">
-                  Select Job Type
+                  Select Workplace Type
                 </option>
-                <option value="hybrid">Hybrid</option>
-                <option value="intern">Intern</option>
+                <option >Hybrid</option>
+                <option value="intern">On-site</option>
                 <option value="remote">Remote</option>
-                <option value="part-time">Part-Time</option>
-                <option value="full-time">Full-Time</option>
-                <option value="contractual">Contractual</option>
+                
               </select>
             </div>
 
